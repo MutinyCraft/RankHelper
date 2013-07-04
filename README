@@ -1,1 +1,1 @@
-This is a continuation of bPermsRanks that will rely solely on Vault. That means it should, in theory, work with any permissions plugins that also interact with Vault.
+This is a continuation of bPermsRanks that will rely solely on Vault. That means it should, in theory, work with any permissions plugins that also interacts with Vault.
