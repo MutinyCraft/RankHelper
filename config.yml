@@ -1,0 +1,39 @@
+# RankHelper version 0.1
+# default config.yml
+
+# The groups/ranks that you wish the plugin to be able to utilize.
+# You will also need to provide the permission node rankhelper.rank.(group) for each group you have listed here.
+
+groups:
+  - default
+  - builder
+  - moderator
+  - admin
+
+# You must add your worlds here if you want the /rank (name) (group) command to work in all of your worlds!
+# If the permissions plugin you uses already mirrors the world permissions you only need to put the main world here.
+# If you are just going to use the /rank (name) (group) (world) command you can ignore this part of the config.
+
+worlds:
+  - world
+  - world_nether
+
+# broadcast - broadcast the rank/group change to the server.
+# notifyRanked - Send a message to the player ranked notifying him/her of the change and who issued the command.
+# notifySender - send a message to the player who issued the /rank command notifying him/her of a the successful change.
+
+broadcast: true
+notifyranked: true
+notifysender: true
+
+# These are the message that will be displayed in game when a group/rank change is performed.  They support color codes beginning with "&".
+# These messages also support tags for replacing certain parts of the message with data pertaining to the group/rank change.
+# {RANKED} is the player that receives the group/rank change.
+# {SENDER} is the player that issues the command.
+# {GROUP} is the group/rank the player has been changed to.
+# You can use the tags as you wish and they can all be used in any of the messages.
+# Do not remove the 's from any of the messages or you will break the config.
+
+broadcastmessage: '&e{RANKED} is now a {GROUP}'
+rankedmessage: '&bNOTICE: &cYour rank has been changed to {GROUP} by {SENDER}'
+sendermessage: '&bNOTICE: &cYou have changed the rank of {RANKED} to {GROUP}'
