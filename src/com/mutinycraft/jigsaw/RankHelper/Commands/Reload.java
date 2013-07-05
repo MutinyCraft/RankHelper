@@ -1,4 +1,4 @@
-package Commands;
+package com.mutinycraft.jigsaw.RankHelper.Commands;
 
 /**
  * User: Jigsaw

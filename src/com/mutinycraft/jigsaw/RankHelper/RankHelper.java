@@ -1,5 +1,6 @@
+package com.mutinycraft.jigsaw.RankHelper;
+
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,7 +28,7 @@ public class RankHelper extends JavaPlugin {
     private String broadcastMessage;
     private String senderMessage;
     private String rankedMessage;
-    private RankHelperCommandExecutor cmdExecutor;
+    private RankHelperCommandExecutor.RankHelperCommandExecutor cmdExecutor;
     private static final String VERSION = " v0.1";
 
     public static Permission permission;
@@ -50,7 +51,7 @@ public class RankHelper extends JavaPlugin {
     }
 
     private void loadCommands() {
-        cmdExecutor = new RankHelperCommandExecutor(this);
+        cmdExecutor = new RankHelperCommandExecutor.RankHelperCommandExecutor(this);
         getCommand("rankhelper").setExecutor(cmdExecutor);
         getCommand("rank").setExecutor(cmdExecutor);
         getCommand("rankoffline").setExecutor(cmdExecutor);
