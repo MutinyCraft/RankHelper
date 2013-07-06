@@ -1,6 +1,6 @@
 package com.mutinycraft.jigsaw.RankHelper.Commands;
 
-import net.milkbowl.vault.permission.Permission;
+import com.mutinycraft.jigsaw.RankHelper.RankHelper;
 
 /**
  * User: Jigsaw
@@ -9,4 +9,10 @@ import net.milkbowl.vault.permission.Permission;
  */
 
 public class RankOffline {
+
+    RankHelper plugin;
+
+    public RankOffline(RankHelper p) {
+        plugin = p;
+    }
 }

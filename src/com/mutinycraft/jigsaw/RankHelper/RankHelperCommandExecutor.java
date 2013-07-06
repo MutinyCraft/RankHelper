@@ -15,7 +15,7 @@ import org.bukkit.command.CommandSender;
  * Time: 9:47 AM
  */
 
-public class RankHelperCommandExecutor implements CommandExecutor{
+public class RankHelperCommandExecutor implements CommandExecutor {
 
     private RankHelper plugin;
     private Rank rank;
@@ -23,64 +23,61 @@ public class RankHelperCommandExecutor implements CommandExecutor{
     private RankOffline rankOffline;
     private Reload reload;
 
-    public RankHelperCommandExecutor(RankHelper p){
+    public RankHelperCommandExecutor(RankHelper p) {
         plugin = p;
-        rank = new Rank();
-        rankInfo = new RankInfo();
-        rankOffline = new RankOffline();
-        reload = new Reload();
+        rank = new Rank(p);
+        rankInfo = new RankInfo(p);
+        rankOffline = new RankOffline(p);
+        reload = new Reload(p);
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("rankhelper")){
-            if(checkPermission(sender, "rank")){
-                if(args.length != 0 && args[0].equalsIgnoreCase("reload") && checkPermission(sender, "reload")){
+        if (cmd.getName().equalsIgnoreCase("rankhelper")) {
+            if (checkPermission(sender, "rank")) {
+                if (args.length != 0 && args[0].equalsIgnoreCase("reload") && checkPermission(sender, "reload")) {
                     plugin.reloadConfig();
                     sender.sendMessage(ChatColor.YELLOW + "Config.yml has been reloaded.");
-                }
-                else{
+                } else {
                     sendHelpMessage(sender);
                 }
                 return true;
-            }
-            else{
+            } else {
                 sendNoPermissionMessage(sender);
                 return true;
             }
         }
-        if(cmd.getName().equalsIgnoreCase("rank")){
-            if(checkPermission(sender, "rank")){
-                if(args.length == 2){
+        if (cmd.getName().equalsIgnoreCase("rank")) {
+            if (checkPermission(sender, "rank")) {
+                if (args.length == 2) {
                     rank.execute(sender, args[0], args[1]);
-                }
-                else if(args.length == 3){
+                } else if (args.length == 3) {
                     rank.execute(sender, args[0], args[1], args[2]);
-                }
-                else{
+                } else {
                     sendHelpMessage(sender);
                 }
-            }
-            else{
+                return true;
+            } else {
                 sendNoPermissionMessage(sender);
+                return true;
             }
         }
         return false;
     }
 
-    private void sendNoPermissionMessage(CommandSender sender){
+    private void sendNoPermissionMessage(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
     }
 
-    private void sendHelpMessage(CommandSender sender){
-        sender.sendMessage(ChatColor.RED + "--- com.mutinycraft.jigsaw.RankHelper.RankHelper Command Usage ---");
+    private void sendHelpMessage(CommandSender sender) {
+        sender.sendMessage(ChatColor.RED + "--- RankHelper Command Usage ---");
         sender.sendMessage(ChatColor.YELLOW + "/rank player group [world]");
         sender.sendMessage(ChatColor.YELLOW + "/rankoffline player group [world]");
         sender.sendMessage(ChatColor.YELLOW + "/rankhelper reload");
     }
 
-    private boolean checkPermission(CommandSender sender, String permission){
-        if(sender.hasPermission("rankhelper." + permission)){
+    private boolean checkPermission(CommandSender sender, String permission) {
+        if (sender.hasPermission("rankhelper." + permission)) {
             return true;
         }
         return false;

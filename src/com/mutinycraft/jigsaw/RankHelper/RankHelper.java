@@ -2,6 +2,7 @@ package com.mutinycraft.jigsaw.RankHelper;
 
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,30 +29,37 @@ public class RankHelper extends JavaPlugin {
     private String broadcastMessage;
     private String senderMessage;
     private String rankedMessage;
-    private RankHelperCommandExecutor.RankHelperCommandExecutor cmdExecutor;
+    private RankHelperCommandExecutor cmdExecutor;
     private static final String VERSION = " v0.1";
 
     public static Permission permission;
 
-    public void onEnable(){
+    public void onEnable() {
 
         log = getLogger();
-        configFile = new File(getDataFolder(), "config.yml");
-        if(!setupPermissions()){
+        try {
+            configFile = new File(getDataFolder(), "config.yml");
+            firstRun();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        config = new YamlConfiguration();
+        if (!setupPermissions()) {
             log.severe("Vault was not successfully hooked.  Ensure you have the latest version of Vault.");
         }
-        try{
+        try {
             firstRun();
-        } catch(Exception e){
+        } catch (Exception e) {
             log.info("There was an error loading the config.yml!");
             e.printStackTrace();
         }
         loadYamls();
         setConfigOptions();
+        loadCommands();
     }
 
     private void loadCommands() {
-        cmdExecutor = new RankHelperCommandExecutor.RankHelperCommandExecutor(this);
+        cmdExecutor = new RankHelperCommandExecutor(this);
         getCommand("rankhelper").setExecutor(cmdExecutor);
         getCommand("rank").setExecutor(cmdExecutor);
         getCommand("rankoffline").setExecutor(cmdExecutor);
@@ -65,8 +73,10 @@ public class RankHelper extends JavaPlugin {
         notifyRanked = config.getBoolean("Notify-Ranked", true);
         notifySender = config.getBoolean("Notify-Sender", true);
         broadcastMessage = config.getString("Broadcast-Message", "&e{RANKED} is now a {GROUP}");
-        rankedMessage = config.getString("Ranked-Message", "&bNOTICE: &cYour rank has been changed to {GROUP} by {SENDER}");
-        senderMessage = config.getString("Sender-Message", "&bNOTICE: &cYou have changed the rank of {RANKED} to {GROUP}");
+        rankedMessage = config.getString("Ranked-Message", "&bNOTICE: &cYour rank has been changed to {GROUP} by " +
+                "{SENDER}");
+        senderMessage = config.getString("Sender-Message", "&bNOTICE: &cYou have changed the rank of {RANKED} to " +
+                "{GROUP}");
     }
 
     public void saveYamls() {
@@ -107,9 +117,9 @@ public class RankHelper extends JavaPlugin {
         }
     }
 
-    private boolean setupPermissions()
-    {
-        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+    private boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration
+                (net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
             permission = permissionProvider.getProvider();
         }
@@ -128,11 +138,11 @@ public class RankHelper extends JavaPlugin {
         return notifySender;
     }
 
-    public List<String> getGroups(){
+    public List<String> getGroups() {
         return groups;
     }
 
-    public List<String> getWorlds(){
+    public List<String> getWorlds() {
         return worlds;
     }
 
