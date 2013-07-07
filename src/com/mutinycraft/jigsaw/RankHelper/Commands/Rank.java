@@ -34,8 +34,7 @@ public class Rank {
      */
     public void execute(CommandSender sender, String playerToRank, String group) {
         if (v.isValidPlayer(playerToRank, sender) && v.isAllowedGroupChange(playerToRank,
-                sender) && v.isValidGroup(group
-                .toLowerCase(), sender)) {
+                sender) && v.isValidGroup(group.toLowerCase(), sender)) {
             Player player = plugin.getServer().getPlayerExact(playerToRank);
             removeGroup(player);
             addGroup(playerToRank, group);
@@ -55,7 +54,8 @@ public class Rank {
      * @param worldName
      */
     public void execute(CommandSender sender, String playerToRank, String group, String worldName) {
-        if (v.isValidGroup(group.toLowerCase(), sender) && v.isValidWorld(worldName)) {
+        if (v.isValidPlayer(playerToRank, sender) && v.isAllowedGroupChange(playerToRank,
+                sender) && v.isValidGroup(group.toLowerCase(), sender) && v.isValidWorld(worldName)) {
             Player player = plugin.getServer().getPlayerExact(playerToRank);
             removeGroup(player, worldName);
             addGroup(playerToRank, group, worldName);
