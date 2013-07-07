@@ -1,4 +1,4 @@
-package com.mutinycraft.jigsaw.RankHelper;
+package com.mutinycraft.jigsaw.RankHelper.Util;
 
 import org.bukkit.ChatColor;
 

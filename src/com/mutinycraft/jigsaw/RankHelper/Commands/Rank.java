@@ -1,7 +1,7 @@
 package com.mutinycraft.jigsaw.RankHelper.Commands;
 
-import com.mutinycraft.jigsaw.RankHelper.MessageHandler;
 import com.mutinycraft.jigsaw.RankHelper.RankHelper;
+import com.mutinycraft.jigsaw.RankHelper.Util.MessageHandler;
 import com.mutinycraft.jigsaw.RankHelper.Util.Validation;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -76,13 +76,12 @@ public class Rank {
     private void removeGroup(Player player) {
         String[] groups;
         World world = null;
-        if(plugin.isGlobalRank()){
+        if (plugin.isGlobalRank()) {
             groups = RankHelper.permission.getPlayerGroups(world, player.getName());
             for (String group : groups) {
                 RankHelper.permission.playerRemoveGroup(world, player.getName(), group);
             }
-        }
-        else{
+        } else {
             groups = RankHelper.permission.getPlayerGroups(player);
             for (String worldName : plugin.getWorlds()) {
                 world = plugin.getServer().getWorld(worldName);
@@ -119,10 +118,9 @@ public class Rank {
      */
     private void addGroup(String player, String group) {
         World world = null;
-        if(plugin.isGlobalRank()){
+        if (plugin.isGlobalRank()) {
             RankHelper.permission.playerAddGroup(world, player, group);
-        }
-        else{
+        } else {
             for (String worldName : plugin.getWorlds()) {
                 world = plugin.getServer().getWorld(worldName);
                 if (world != null) {

@@ -139,7 +139,7 @@ public class RankHelper extends JavaPlugin {
         return notifySender;
     }
 
-    public boolean isGlobalRank(){
+    public boolean isGlobalRank() {
         return globalRank;
     }
 
