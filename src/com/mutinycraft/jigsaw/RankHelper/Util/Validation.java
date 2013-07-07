@@ -83,4 +83,16 @@ public class Validation {
                 "matters with world names.  That means world is not the same as World.");
         return false;
     }
+
+    /**
+     * Checks whether the command sender has permission to rank to the provided group or if they have the wildcard
+     * which allows them to rank to any group.
+     *
+     * @param group  to check for permission to rank to.
+     * @param sender to check if the proper permission granted.
+     * @return true if allowed to change the group, false otherwise.
+     */
+    public boolean hasPermissionForGroup(String group, CommandSender sender) {
+        return (sender.hasPermission("rankhelper.rank." + group) || sender.hasPermission("rankhelper.rank.*"));
+    }
 }
