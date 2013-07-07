@@ -23,6 +23,7 @@ public class RankHelper extends JavaPlugin {
     private FileConfiguration config;
     private List<String> groups;
     private List<String> worlds;
+    private boolean globalRank;
     private boolean broadcast;
     private boolean notifyRanked;
     private boolean notifySender;
@@ -30,7 +31,7 @@ public class RankHelper extends JavaPlugin {
     private String senderMessage;
     private String rankedMessage;
     private RankHelperCommandExecutor cmdExecutor;
-    private static final String VERSION = " v0.1";
+    private static final String VERSION = " v0.2";
 
     public static Permission permission;
 
@@ -62,13 +63,13 @@ public class RankHelper extends JavaPlugin {
         cmdExecutor = new RankHelperCommandExecutor(this);
         getCommand("rankhelper").setExecutor(cmdExecutor);
         getCommand("rank").setExecutor(cmdExecutor);
-        getCommand("rankoffline").setExecutor(cmdExecutor);
         getCommand("rankinfo").setExecutor(cmdExecutor);
     }
 
     private void setConfigOptions() {
         groups = config.getStringList("Groups");
         worlds = config.getStringList("Worlds");
+        globalRank = config.getBoolean("Global-Rank", false);
         broadcast = config.getBoolean("Broadcast", true);
         notifyRanked = config.getBoolean("Notify-Ranked", true);
         notifySender = config.getBoolean("Notify-Sender", true);
@@ -136,6 +137,10 @@ public class RankHelper extends JavaPlugin {
 
     public boolean isNotifySender() {
         return notifySender;
+    }
+
+    public boolean isGlobalRank(){
+        return globalRank;
     }
 
     public List<String> getGroups() {

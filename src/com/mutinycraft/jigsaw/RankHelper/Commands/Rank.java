@@ -74,13 +74,22 @@ public class Rank {
      * @param player to remove groups from.
      */
     private void removeGroup(Player player) {
-        String[] groups = RankHelper.permission.getPlayerGroups(player);
-        World world;
-        for (String worldName : plugin.getWorlds()) {
-            world = plugin.getServer().getWorld(worldName);
-            if (world != null) {
-                for (String group : groups) {
-                    RankHelper.permission.playerRemoveGroup(world, player.getName(), group);
+        String[] groups;
+        World world = null;
+        if(plugin.isGlobalRank()){
+            groups = RankHelper.permission.getPlayerGroups(world, player.getName());
+            for (String group : groups) {
+                RankHelper.permission.playerRemoveGroup(world, player.getName(), group);
+            }
+        }
+        else{
+            groups = RankHelper.permission.getPlayerGroups(player);
+            for (String worldName : plugin.getWorlds()) {
+                world = plugin.getServer().getWorld(worldName);
+                if (world != null) {
+                    for (String group : groups) {
+                        RankHelper.permission.playerRemoveGroup(world, player.getName(), group);
+                    }
                 }
             }
         }
@@ -109,11 +118,16 @@ public class Rank {
      * @param group  to add to player.
      */
     private void addGroup(String player, String group) {
-        World world;
-        for (String worldName : plugin.getWorlds()) {
-            world = plugin.getServer().getWorld(worldName);
-            if (world != null) {
-                RankHelper.permission.playerAddGroup(world, player, group);
+        World world = null;
+        if(plugin.isGlobalRank()){
+            RankHelper.permission.playerAddGroup(world, player, group);
+        }
+        else{
+            for (String worldName : plugin.getWorlds()) {
+                world = plugin.getServer().getWorld(worldName);
+                if (world != null) {
+                    RankHelper.permission.playerAddGroup(world, player, group);
+                }
             }
         }
     }

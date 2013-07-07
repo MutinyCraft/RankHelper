@@ -1,4 +1,4 @@
-# com.mutinycraft.jigsaw.RankHelper.RankHelper version 0.1
+# RankHelper version 0.2
 # default config.yml
 
 # The groups/ranks that you wish the plugin to be able to utilize.
@@ -13,10 +13,17 @@ Groups:
 # You must add your worlds here if you want the /rank (name) (group) command to work in all of your worlds!
 # If the permissions plugin you uses already mirrors the world permissions you only need to put the main world here.
 # If you are just going to use the /rank (name) (group) (world) command you can ignore this part of the config.
+# Important: If you use global files (all your permissions are the exact same for every world) you can simply ignore
+# the Worlds and set Global-Rank to true below.
 
 Worlds:
   - world
   - world_nether
+
+
+# Set this value to true if your permission plugin uses global files to store players and their group.  If your
+# permission plugin does not support global files or you are using per-world permissions you should not change this.
+Global-Rank: false
 
 # broadcast - broadcast the rank/group change to the server.
 # notifyRanked - Send a message to the player ranked notifying him/her of the change and who issued the command.
