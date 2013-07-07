@@ -1,6 +1,8 @@
 package com.mutinycraft.jigsaw.RankHelper.Commands;
 
 import com.mutinycraft.jigsaw.RankHelper.RankHelper;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 /**
  * User: Jigsaw
@@ -14,5 +16,10 @@ public class Reload {
 
     public Reload(RankHelper p) {
         plugin = p;
+    }
+
+    public void execute(CommandSender sender) {
+        plugin.reloadConfig();
+        sender.sendMessage(ChatColor.YELLOW + "RankHelper config.yml has been reloaded.");
     }
 }

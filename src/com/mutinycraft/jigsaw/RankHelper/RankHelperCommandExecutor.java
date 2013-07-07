@@ -2,7 +2,6 @@ package com.mutinycraft.jigsaw.RankHelper;
 
 import com.mutinycraft.jigsaw.RankHelper.Commands.Rank;
 import com.mutinycraft.jigsaw.RankHelper.Commands.RankInfo;
-import com.mutinycraft.jigsaw.RankHelper.Commands.RankOffline;
 import com.mutinycraft.jigsaw.RankHelper.Commands.Reload;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,14 +19,12 @@ public class RankHelperCommandExecutor implements CommandExecutor {
     private RankHelper plugin;
     private Rank rank;
     private RankInfo rankInfo;
-    private RankOffline rankOffline;
     private Reload reload;
 
     public RankHelperCommandExecutor(RankHelper p) {
         plugin = p;
         rank = new Rank(p);
         rankInfo = new RankInfo(p);
-        rankOffline = new RankOffline(p);
         reload = new Reload(p);
     }
 
@@ -36,8 +33,7 @@ public class RankHelperCommandExecutor implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("rankhelper")) {
             if (checkPermission(sender, "rank")) {
                 if (args.length != 0 && args[0].equalsIgnoreCase("reload") && checkPermission(sender, "reload")) {
-                    plugin.reloadConfig();
-                    sender.sendMessage(ChatColor.YELLOW + "Config.yml has been reloaded.");
+                    reload.execute(sender);
                 } else {
                     sendHelpMessage(sender);
                 }
