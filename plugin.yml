@@ -9,9 +9,6 @@ commands:
    rank:
       description: Changes the group of the given player.
       usage: /rank (player) (rank/group) [world]
-   rankoffline:
-      description: Changes the group of the given player regardless of their online status.
-      usage: /rank (player) (rank/group) [world]
    rankinfo:
       description: Returns the group/s of a player in the provided world.
       usage: /rankinfo (player) (world)

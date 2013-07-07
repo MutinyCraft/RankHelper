@@ -91,6 +91,7 @@ public class RankHelperCommandExecutor implements CommandExecutor {
     private void sendHelpMessage(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "--- RankHelper Command Usage ---");
         sender.sendMessage(ChatColor.YELLOW + "/rank player group [world]");
+        sender.sendMessage(ChatColor.YELLOW + "/rankinfo player world");
         sender.sendMessage(ChatColor.YELLOW + "/rankhelper reload");
     }
 

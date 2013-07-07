@@ -37,7 +37,7 @@ public class RankInfo {
                 sb.append(group);
                 sb.append(" ");
             }
-            sender.sendMessage(ChatColor.GREEN + "The player " + playerName + "has the following groups in " +
+            sender.sendMessage(ChatColor.GREEN + "The player " + playerName + " has the following groups in " +
                     worldName + ": " + sb.toString());
         }
     }
