@@ -76,10 +76,12 @@ public class Validation {
      * @param worldName of world to check.
      * @return true if valid world, false otherwise.
      */
-    public boolean isValidWorld(String worldName) {
+    public boolean isValidWorld(String worldName, CommandSender sender) {
         if (plugin.getServer().getWorld(worldName) != null) {
             return true;
         }
+        sender.sendMessage(ChatColor.RED + "The world name {" + worldName + "} is not a valid/loaded world.  Case " +
+                "matters with world names.  That means world is not the same as World.");
         return false;
     }
 }

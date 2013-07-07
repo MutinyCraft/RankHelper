@@ -58,20 +58,48 @@ public class RankHelperCommandExecutor implements CommandExecutor {
                 return true;
             }
         }
+        if (cmd.getName().equalsIgnoreCase("rankinfo")) {
+            if (checkPermission(sender, "rankinfo")) {
+                if (args.length == 2) {
+                    rankInfo.execute(sender, args[0], args[1]);
+                } else {
+                    sendHelpMessage(sender);
+                }
+                return true;
+            } else {
+                sendNoPermissionMessage(sender);
+                return true;
+            }
+        }
         return false;
     }
 
+    /**
+     * Sends the command sender a message when they have no permission for a command.
+     *
+     * @param sender to send the message to.
+     */
     private void sendNoPermissionMessage(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
     }
 
+    /**
+     * Sends the command sender a message with help information.
+     *
+     * @param sender to send the message to.
+     */
     private void sendHelpMessage(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "--- RankHelper Command Usage ---");
         sender.sendMessage(ChatColor.YELLOW + "/rank player group [world]");
-        sender.sendMessage(ChatColor.YELLOW + "/rankoffline player group [world]");
         sender.sendMessage(ChatColor.YELLOW + "/rankhelper reload");
     }
 
+    /**
+     * Check the permission of the provided player with the provided permission.
+     *
+     * @param sender     to check.
+     * @param permission to check.
+     */
     private boolean checkPermission(CommandSender sender, String permission) {
         if (sender.hasPermission("rankhelper." + permission)) {
             return true;

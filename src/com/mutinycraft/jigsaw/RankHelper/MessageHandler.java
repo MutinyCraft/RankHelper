@@ -10,6 +10,15 @@ import org.bukkit.ChatColor;
 
 public class MessageHandler {
 
+    /**
+     * Replaces customizable tags with the values in the config.yml.
+     *
+     * @param msg    to replace tags in.
+     * @param group  to use as replacement for {GROUP} tag.
+     * @param ranked to use as replacement for {RANKED} tag.
+     * @param sender to use as replacement for {SENDER} tag.
+     * @return
+     */
     public String replaceTags(String msg, String group, String ranked, String sender) {
         StringBuilder sb = new StringBuilder();
         String groupTag = "{GROUP}";

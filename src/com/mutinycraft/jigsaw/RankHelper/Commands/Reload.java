@@ -18,6 +18,11 @@ public class Reload {
         plugin = p;
     }
 
+    /**
+     * Reloads the config.yml.
+     *
+     * @param sender that issued the command.
+     */
     public void execute(CommandSender sender) {
         plugin.reloadConfig();
         sender.sendMessage(ChatColor.YELLOW + "RankHelper config.yml has been reloaded.");
