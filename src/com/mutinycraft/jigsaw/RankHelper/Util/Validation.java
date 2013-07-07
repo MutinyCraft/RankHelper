@@ -47,8 +47,7 @@ public class Validation {
         if (player != null && player.isOnline()) {
             return true;
         } else {
-            sender.sendMessage(ChatColor.RED + "The player {" + playerToRank + "} is not currently online.  Use " +
-                    "/rankoffline if you are sure you want to rank this player.");
+            sender.sendMessage(ChatColor.RED + "The player {" + playerToRank + "} is not currently online.");
             return false;
         }
     }
